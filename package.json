@@ -1,0 +1,65 @@
+{
+  "name": "pleasure-docs",
+  "description": "Better docs for software dev",
+  "author": "Martin Rafael <tin@devtin.io>",
+  "version": "1.0.0",
+  "main": "dist/pleasure-docs.js",
+  "module": "dist/pleasure-docs.esm.js",
+  "license": "MIT",
+  "badges": [
+    {
+      "name": "npm",
+      "image": "https://img.shields.io/npm/v/pleasure-docs.svg",
+      "url": "https://npmjs.com/package/pleasure-docs"
+    },
+    {
+      "name": "deps",
+      "image": "https://david-dm.org/darrenpaulwright/pleasure-docs.svg",
+      "url": "https://david-dm.org/darrenpaulwright/pleasure-docs"
+    },
+    {
+      "name": "size",
+      "image": "https://packagephobia.now.sh/badge?p=pleasure-docs",
+      "url": "https://packagephobia.now.sh/result?p=pleasure-docs"
+    },
+    {
+      "name": "vulnerabilities",
+      "image": "https://snyk.io/test/github/DarrenPaulWright/pleasure-docs/badge.svg?targetFile=package.json",
+      "url": "https://snyk.io/test/github/DarrenPaulWright/pleasure-docs?targetFile=package.json"
+    },
+    {
+      "name": "license",
+      "image": "https://img.shields.io/github/license/DarrenPaulWright/pleasure-docs.svg",
+      "url": "https://npmjs.com/package/pleasure-docs/LICENSE.md"
+    }
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:live": "nodemon -w src --exec yarn build",
+    "build:docs": "jsdoc2md --template DOCS.hbs --files dist/pleasure-docs.js > DOCS.md",
+    "build:readme": "node scripts/build-readme.js",
+    "test": "ava --serial --verbose"
+  },
+  "devDependencies": {
+    "ava": "^2.1.0",
+    "jsdoc": "^3.6.3",
+    "nodemon": "^1.19.1",
+    "rollup": "^1.12.4",
+    "rollup-plugin-alias": "^1.5.1",
+    "rollup-plugin-babel-minify": "^8.0.0",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-json": "^4.0.0"
+  },
+  "dependencies": {
+    "deepmerge": "^3.2.1",
+    "dmd": "^4.0.0",
+    "dmd-clean": "^0.1.1",
+    "dmd-clear": "^0.1.2",
+    "pleasure-docs": "^1.0.0",
+    "gherkin": "5.0.0",
+    "inquirer": "^6.3.1",
+    "jsdoc-api": "^5.0.4",
+    "jsdoc-to-markdown": "^5.0.0",
+    "lodash": "^4.17.11"
+  }
+}

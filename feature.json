@@ -1,0 +1,300 @@
+{
+  "feature": {
+    "type": "Feature",
+    "tags": [],
+    "location": {
+      "line": 1,
+      "column": 1
+    },
+    "language": "en",
+    "keyword": "Feature",
+    "name": "Login Page",
+    "description": "  Users must be able to access a login page where they can input\n  their credentials (email or smeId, password and a DFA token) in order to access\n  the application.",
+    "children": [
+      {
+        "type": "Scenario",
+        "tags": [
+          {
+            "type": "Tag",
+            "location": {
+              "line": 7,
+              "column": 3
+            },
+            "name": "@doc"
+          }
+        ],
+        "location": {
+          "line": 8,
+          "column": 3
+        },
+        "keyword": "Scenario",
+        "name": "Accessing the application",
+        "steps": [
+          {
+            "type": "Step",
+            "location": {
+              "line": 9,
+              "column": 5
+            },
+            "keyword": "Given ",
+            "text": "A user who have not signed in"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 10,
+              "column": 5
+            },
+            "keyword": "When ",
+            "text": "The user browses to the application"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 11,
+              "column": 5
+            },
+            "keyword": "Then ",
+            "text": "The user must be taken to the login page"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 12,
+              "column": 5
+            },
+            "keyword": "And ",
+            "text": "The Login Page must contain an email, password, and DFA inputs, as well as a 'login' submit button"
+          }
+        ]
+      },
+      {
+        "type": "Scenario",
+        "tags": [
+          {
+            "type": "Tag",
+            "location": {
+              "line": 14,
+              "column": 3
+            },
+            "name": "@doc"
+          }
+        ],
+        "location": {
+          "line": 15,
+          "column": 3
+        },
+        "keyword": "Scenario",
+        "name": "Newly registered user receives their initial credentials via e-mail",
+        "steps": [
+          {
+            "type": "Step",
+            "location": {
+              "line": 16,
+              "column": 5
+            },
+            "keyword": "Given ",
+            "text": "A newly registered user credentials"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 17,
+              "column": 5
+            },
+            "keyword": "When ",
+            "text": "The user clicks on the url provided via email"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 18,
+              "column": 5
+            },
+            "keyword": "And ",
+            "text": "Login form is submitted using the user email or smeId and password received by email"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 19,
+              "column": 5
+            },
+            "keyword": "Then ",
+            "text": "The user must be taken to the force change password page"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 20,
+              "column": 5
+            },
+            "keyword": "And ",
+            "text": "The user won't be able to access other routes until changing its password and enabling DFA"
+          }
+        ]
+      },
+      {
+        "type": "ScenarioOutline",
+        "tags": [],
+        "location": {
+          "line": 22,
+          "column": 3
+        },
+        "keyword": "Scenario Outline",
+        "name": "Add numbers",
+        "steps": [
+          {
+            "type": "Step",
+            "location": {
+              "line": 23,
+              "column": 5
+            },
+            "keyword": "Given ",
+            "text": "a file named \"main.py\" with:",
+            "argument": {
+              "type": "DocString",
+              "location": {
+                "line": 24,
+                "column": 5
+              },
+              "content": "print(<x> + <y>)"
+            }
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 27,
+              "column": 5
+            },
+            "keyword": "When ",
+            "text": "I successfully run `python3 main.py`"
+          },
+          {
+            "type": "Step",
+            "location": {
+              "line": 28,
+              "column": 5
+            },
+            "keyword": "Then ",
+            "text": "the stdout should contain exactly \"<z>\""
+          }
+        ],
+        "examples": [
+          {
+            "type": "Examples",
+            "tags": [],
+            "location": {
+              "line": 29,
+              "column": 5
+            },
+            "keyword": "Examples",
+            "name": "",
+            "tableHeader": {
+              "type": "TableRow",
+              "location": {
+                "line": 30,
+                "column": 7
+              },
+              "cells": [
+                {
+                  "type": "TableCell",
+                  "location": {
+                    "line": 30,
+                    "column": 9
+                  },
+                  "value": "x"
+                },
+                {
+                  "type": "TableCell",
+                  "location": {
+                    "line": 30,
+                    "column": 13
+                  },
+                  "value": "y"
+                },
+                {
+                  "type": "TableCell",
+                  "location": {
+                    "line": 30,
+                    "column": 17
+                  },
+                  "value": "z"
+                }
+              ]
+            },
+            "tableBody": [
+              {
+                "type": "TableRow",
+                "location": {
+                  "line": 31,
+                  "column": 7
+                },
+                "cells": [
+                  {
+                    "type": "TableCell",
+                    "location": {
+                      "line": 31,
+                      "column": 9
+                    },
+                    "value": "1"
+                  },
+                  {
+                    "type": "TableCell",
+                    "location": {
+                      "line": 31,
+                      "column": 13
+                    },
+                    "value": "2"
+                  },
+                  {
+                    "type": "TableCell",
+                    "location": {
+                      "line": 31,
+                      "column": 17
+                    },
+                    "value": "3"
+                  }
+                ]
+              },
+              {
+                "type": "TableRow",
+                "location": {
+                  "line": 32,
+                  "column": 7
+                },
+                "cells": [
+                  {
+                    "type": "TableCell",
+                    "location": {
+                      "line": 32,
+                      "column": 9
+                    },
+                    "value": "4"
+                  },
+                  {
+                    "type": "TableCell",
+                    "location": {
+                      "line": 32,
+                      "column": 13
+                    },
+                    "value": "5"
+                  },
+                  {
+                    "type": "TableCell",
+                    "location": {
+                      "line": 32,
+                      "column": 17
+                    },
+                    "value": "9"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "comments": []
+}

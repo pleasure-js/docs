@@ -1,0 +1,1 @@
+- [ ] Add vue component docs from pleasure-ui-vue
