@@ -122,7 +122,7 @@ Parses given [CucumberFeature](#CucumberFeature) into markdown
 **Example** *(Parsing a &#x60;.feature&#x60; file.)*  
 
 ```js
-const { parseFeatureFile, cucumberFeatureToMd } = require('pleasure-docs')
+const { parseFeatureFile, cucumberFeatureToMd } = require('@pleasure-js/docs')
 
 parseFeatureFile('/path/to/feature-file.feature')
   .then(cucumberFeature => {

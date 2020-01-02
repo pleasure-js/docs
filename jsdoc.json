@@ -1,0 +1,80 @@
+[
+  {
+    "comment": "/**\n * @typedef {Object} CucumberFeature\n * @property {Object} feature - The cucumber feature\n * @property {String} feature.language - The language in which the feature is written.\n * @property {String} feature.name - Feature name\n * @property {String} feature.description - Feature description\n * @property {FeatureScenario[]} feature.children\n * @property {Array} comments - Array of comments\n * @see https://cucumber.io/docs/gherkin/reference/\n */",
+    "meta": {
+      "filename": "l5yfqkm0ga9zyjs9dl3mz.js",
+      "lineno": 1,
+      "columnno": 0,
+      "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
+      "code": {}
+    },
+    "kind": "typedef",
+    "name": "CucumberFeature",
+    "type": {
+      "names": [
+        "Object"
+      ]
+    },
+    "properties": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "description": "The cucumber feature",
+        "name": "feature"
+      },
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "The language in which the feature is written.",
+        "name": "feature.language"
+      },
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "Feature name",
+        "name": "feature.name"
+      },
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "Feature description",
+        "name": "feature.description"
+      },
+      {
+        "type": {
+          "names": [
+            "Array.<FeatureScenario>"
+          ]
+        },
+        "name": "feature.children"
+      },
+      {
+        "type": {
+          "names": [
+            "Array"
+          ]
+        },
+        "description": "Array of comments",
+        "name": "comments"
+      }
+    ],
+    "see": [
+      "https://cucumber.io/docs/gherkin/reference/"
+    ],
+    "longname": "CucumberFeature",
+    "scope": "global",
+    "id": "cucumber-feature"
+  }
+]

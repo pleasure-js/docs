@@ -226,7 +226,7 @@ async function parseFeatureFile (featureFile) {
  * @example <caption>Parsing a `.feature` file.</caption>
  *
  * ```js
- * const { parseFeatureFile, cucumberFeatureToMd } = require('pleasure-docs')
+ * const { parseFeatureFile, cucumberFeatureToMd } = require('@pleasure-js/docs')
  *
  * parseFeatureFile('/path/to/feature-file.feature')
  *   .then(cucumberFeature => {
