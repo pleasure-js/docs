@@ -2,9 +2,9 @@
   "name": "@pleasure-js/docs",
   "description": "Better docs for software dev",
   "author": "Martin Rafael <tin@devtin.io>",
-  "version": "1.0.0",
-  "main": "dist/pleasure-docs.js",
-  "module": "dist/pleasure-docs.esm.js",
+  "version": "1.0.0-beta",
+  "main": "dist/docs.js",
+  "module": "dist/docs.esm.js",
   "license": "MIT",
   "badges": [
     {
