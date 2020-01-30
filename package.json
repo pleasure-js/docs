@@ -51,14 +51,15 @@
     "rollup-plugin-json": "^4.0.0"
   },
   "dependencies": {
-    "deepmerge": "^3.2.1",
-    "dmd": "^4.0.0",
+    "deepmerge": "^4.2.2",
+    "dmd": "^5.0.0",
+    "dmd-readable": "^1.1.1",
     "dmd-clean": "^0.1.1",
     "dmd-clear": "^0.1.2",
     "gherkin": "5.0.0",
-    "inquirer": "^6.3.1",
+    "inquirer": "^7.0.3",
     "jsdoc-api": "^5.0.4",
-    "jsdoc-to-markdown": "^5.0.0",
-    "lodash": "^4.17.11"
+    "jsdoc-to-markdown": "^5.0.3",
+    "lodash": "^4.17.15"
   }
 }
