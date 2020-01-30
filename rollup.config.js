@@ -39,7 +39,7 @@ export default [
     input: 'src/index.js',
     output: [
       {
-        file: `dist/${ name }.js`,
+        file: `dist/docs.js`,
         format: 'cjs',
         banner
       },
@@ -50,7 +50,7 @@ export default [
     input: 'src/index.js',
     output: [
       {
-        file: `dist/${ name }.esm.js`,
+        file: `dist/docs.esm.js`,
         format: 'esm',
         banner
       }
