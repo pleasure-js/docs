@@ -6,32 +6,8 @@
   "main": "dist/docs.js",
   "module": "dist/docs.esm.js",
   "license": "MIT",
-  "badges": [
-    {
-      "name": "npm",
-      "image": "https://img.shields.io/npm/v/pleasure-docs.svg",
-      "url": "https://npmjs.com/package/pleasure-docs"
-    },
-    {
-      "name": "deps",
-      "image": "https://david-dm.org/darrenpaulwright/pleasure-docs.svg",
-      "url": "https://david-dm.org/darrenpaulwright/pleasure-docs"
-    },
-    {
-      "name": "size",
-      "image": "https://packagephobia.now.sh/badge?p=pleasure-docs",
-      "url": "https://packagephobia.now.sh/result?p=pleasure-docs"
-    },
-    {
-      "name": "vulnerabilities",
-      "image": "https://snyk.io/test/github/DarrenPaulWright/pleasure-docs/badge.svg?targetFile=package.json",
-      "url": "https://snyk.io/test/github/DarrenPaulWright/pleasure-docs?targetFile=package.json"
-    },
-    {
-      "name": "license",
-      "image": "https://img.shields.io/github/license/DarrenPaulWright/pleasure-docs.svg",
-      "url": "https://npmjs.com/package/pleasure-docs/LICENSE.md"
-    }
+  "files": [
+    "dist/*"
   ],
   "scripts": {
     "build": "rollup -c",

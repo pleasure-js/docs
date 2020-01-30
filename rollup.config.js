@@ -2,7 +2,6 @@ import path from 'path'
 import commonjs from 'rollup-plugin-commonjs'
 import json from 'rollup-plugin-json'
 import alias from 'rollup-plugin-alias'
-import resolve from 'rollup-plugin-node-resolve'
 import { startCase } from 'lodash'
 import { name, version, author, license } from './package.json'
 
