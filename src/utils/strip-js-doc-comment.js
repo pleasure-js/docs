@@ -10,10 +10,16 @@ import trim from 'lodash/trim'
  * ```js
  * const jsDocSyntax = `/**
  *  * A JSDoc description
- *  * @typedef {Object} Test
+ *  *
+ *  * Hello
  *  **\/`
+ *
+ *  // => Outputs:
+ *  // A JSDoc description
+ *  //
+ *  // Hello
  * ```
  */
 export function stripJsdocComment (jsDocCommentBlock) {
-  return trim(jsDocCommentBlock.replace(/^ \* /mgsi, ''))
+  return trim(jsDocCommentBlock.replace(/^ \* ?/mgsi, ''))
 }
