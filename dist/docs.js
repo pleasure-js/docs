@@ -1,17 +1,24 @@
 /*!
- * pleasure-docs v1.0.0
- * (c) 2019-2019 Martin Rafael <tin@devtin.io>
+ * @pleasure-js/docs v1.0.0-beta
+ * (c) 2019-2020 Martin Rafael <tin@devtin.io>
  * MIT
  */
-import fs, { readFile } from 'fs';
-import path from 'path';
-import util from 'util';
-import trim from 'lodash/trim';
-import { Parser, AstBuilder, TokenMatcher, TokenScanner } from 'gherkin';
-import { explainSync as explainSync$1, explain as explain$1 } from 'jsdoc-api';
-import os from 'os';
-import kebabCase from 'lodash/kebabCase';
-import json2md from 'jsdoc-to-markdown';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var fs = require('fs');
+var fs__default = _interopDefault(fs);
+var path = _interopDefault(require('path'));
+var util = _interopDefault(require('util'));
+var trim = _interopDefault(require('lodash/trim'));
+var gherkin = require('gherkin');
+var jsdocApi = require('jsdoc-api');
+var os = _interopDefault(require('os'));
+var kebabCase = _interopDefault(require('lodash/kebabCase'));
+var json2md = _interopDefault(require('jsdoc-to-markdown'));
 
 /**
  * @name Installation
@@ -52,7 +59,7 @@ import json2md from 'jsdoc-to-markdown';
 
 const PleasureDocs = true;
 
-const readFileAsync = util.promisify(readFile);
+const readFileAsync = util.promisify(fs.readFile);
 
 /**
  * Removes all asterisks and additional white spaces from JSDoc comments
@@ -64,12 +71,13 @@ const readFileAsync = util.promisify(readFile);
  * ```js
  * const jsDocSyntax = `/**
  *  * A JSDoc description
- *  * @typedef {Object} Test
+ *  *
+ *  * Hello
  *  **\/`
  * ```
  */
 function stripJsdocComment (jsDocCommentBlock) {
-  return trim(jsDocCommentBlock.replace(/^ \* /mgsi, ''))
+  return trim(jsDocCommentBlock.replace(/^ \* ?/mgsi, ''))
 }
 
 const availableFlags = ['skip', 'only', 'todo'];
@@ -152,11 +160,11 @@ async function parseAvaFile (file, options) {
  * @return {AvaTest[]}
  */
 function parseAvaFileSync (file, options) {
-  return parseAva(fs.readFileSync(path.resolve(process.cwd(), file)).toString(), options)
+  return parseAva(fs__default.readFileSync(path.resolve(process.cwd(), file)).toString(), options)
 }
 
-const GherkinParser = new Parser(new AstBuilder());
-const matcher = new TokenMatcher();
+const GherkinParser = new gherkin.Parser(new gherkin.AstBuilder());
+const matcher = new gherkin.TokenMatcher();
 
 /**
  * @typedef {Object} CucumberFeature
@@ -203,7 +211,7 @@ const matcher = new TokenMatcher();
  * @return {Promise<CucumberFeature>}
  */
 async function parseGherkin (rawGherkinSyntax) {
-  const scanner = new TokenScanner(rawGherkinSyntax);
+  const scanner = new gherkin.TokenScanner(rawGherkinSyntax);
   return GherkinParser.parse(scanner, matcher)
 }
 
@@ -374,10 +382,10 @@ function fixOptions (options) {
  * @private
  */
 function setupTemporaryFile (options) {
-  const jsDocConfig = JSON.parse(fs.readFileSync(require.resolve('jsdoc/conf.json.EXAMPLE')).toString());
+  const jsDocConfig = JSON.parse(fs__default.readFileSync(require.resolve('jsdoc/conf.json.EXAMPLE')).toString());
   jsDocConfig.source.excludePattern = '';
 
-  fs.writeFileSync(options.configure, JSON.stringify(jsDocConfig, null, 2));
+  fs__default.writeFileSync(options.configure, JSON.stringify(jsDocConfig, null, 2));
 }
 
 /**
@@ -387,7 +395,7 @@ function setupTemporaryFile (options) {
  */
 function workaroundCleanup (options) {
   if (options.$workaroundIssue19) {
-    fs.unlinkSync(options.configure);
+    fs__default.unlinkSync(options.configure);
   }
 }
 
@@ -416,7 +424,7 @@ function explainSync (options) {
   options = fixOptions(options);
 
   try {
-    res = explainSync$1(options);
+    res = jsdocApi.explainSync(options);
   } catch (err) {
     errored = err;
     handleError(err, options);
@@ -441,7 +449,7 @@ async function explain (options) {
   options = fixOptions(options);
 
   try {
-    res = await explain$1(options);
+    res = await jsdocApi.explain(options);
   } catch (err) {
     errored = err;
     handleError(err, options);
@@ -574,4 +582,15 @@ function jsdocJsonToMarkdown (JSDocJson, { template = JSDocJsonToMarkdownTemplat
   })
 }
 
-export { PleasureDocs, avaTestToMd, avaTestsToMd, cucumberFeatureToMd, jsDocSyntaxToJson, jsDocSyntaxToJsonAsync, jsdocJsonToMarkdown, parseAva, parseAvaFile, parseAvaFileSync, parseFeatureFile, parseGherkin };
+exports.PleasureDocs = PleasureDocs;
+exports.avaTestToMd = avaTestToMd;
+exports.avaTestsToMd = avaTestsToMd;
+exports.cucumberFeatureToMd = cucumberFeatureToMd;
+exports.jsDocSyntaxToJson = jsDocSyntaxToJson;
+exports.jsDocSyntaxToJsonAsync = jsDocSyntaxToJsonAsync;
+exports.jsdocJsonToMarkdown = jsdocJsonToMarkdown;
+exports.parseAva = parseAva;
+exports.parseAvaFile = parseAvaFile;
+exports.parseAvaFileSync = parseAvaFileSync;
+exports.parseFeatureFile = parseFeatureFile;
+exports.parseGherkin = parseGherkin;
