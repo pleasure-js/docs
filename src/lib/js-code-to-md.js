@@ -1,5 +1,5 @@
 import { patterns } from './parse-ava.js'
-import { stripJsdocComment } from 'src/utils/strip-js-doc-comment'
+import { stripJsdocComment } from '../utils/strip-js-doc-comment'
 
 export function jsCodeToMd (jsCode) {
   // return '```js\n' + jsCode + '\n```'

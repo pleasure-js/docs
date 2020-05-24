@@ -1,5 +1,5 @@
 /*!
- * @pleasure-js/docs v1.0.0-beta
+ * @pleasure-js/docs v1.0.0
  * (c) 2019-2020 Martin Rafael <tin@devtin.io>
  * MIT
  */
@@ -74,6 +74,11 @@ const readFileAsync = util.promisify(fs.readFile);
  *  *
  *  * Hello
  *  **\/`
+ *
+ *  // => Outputs:
+ *  // A JSDoc description
+ *  //
+ *  // Hello
  * ```
  */
 function stripJsdocComment (jsDocCommentBlock) {
@@ -586,6 +591,7 @@ exports.PleasureDocs = PleasureDocs;
 exports.avaTestToMd = avaTestToMd;
 exports.avaTestsToMd = avaTestsToMd;
 exports.cucumberFeatureToMd = cucumberFeatureToMd;
+exports.jsCodeToMd = jsCodeToMd;
 exports.jsDocSyntaxToJson = jsDocSyntaxToJson;
 exports.jsDocSyntaxToJsonAsync = jsDocSyntaxToJsonAsync;
 exports.jsdocJsonToMarkdown = jsdocJsonToMarkdown;

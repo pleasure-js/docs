@@ -3,7 +3,7 @@ import { jsDocSyntaxToJson, jsDocSyntaxToJsonAsync, jsdocJsonToMarkdown } from '
 import fs from 'fs'
 import { fromTestDirectory } from './utils/from-test-directory.js'
 
-test.only(`Parses JSDoc syntax into JSON`, async t => {
+test(`Parses JSDoc syntax into JSON`, async t => {
   const parsed = jsDocSyntaxToJson(fs.readFileSync(fromTestDirectory('./benchmark/jsdoc-syntax.js')).toString())
   fs.writeFileSync('jsdoc.json', JSON.stringify(parsed, null, 2))
   t.true(Array.isArray(parsed))
@@ -13,7 +13,7 @@ test.only(`Parses JSDoc syntax into JSON`, async t => {
 
 test(`JSDoc to markdown`, async t => {
   // const marked = jsdocJsonToMarkdown(jsDocSyntaxToJson(fs.readFileSync(fromTestDirectory('./benchmark/jsdoc-syntax.js')).toString()).slice(0, 1))
-  const docs = jsDocSyntaxToJson(fs.readFileSync(fromTestDirectory('../dist/pleasure-docs.esm.js')).toString())
+  const docs = jsDocSyntaxToJson(fs.readFileSync(fromTestDirectory('../dist/docs.esm.js')).toString())
   // console.log({ docs })
   const marked = jsdocJsonToMarkdown(docs, { plugin: ['dmd-readable'] })
   t.truthy(marked)

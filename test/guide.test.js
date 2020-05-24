@@ -64,7 +64,7 @@ test(`Parses AVA files`, async t => {
 })
 
 /**
- * Having a object parsed per test is useful in order easily to output it to any other desired format.
+ * Having a object parsed per test is useful in order to easily output it to any other desired format.
  */
 
 test(`Converts AVA tests into markdown`, async t => {

@@ -1,5 +1,5 @@
 import { Parser, AstBuilder, TokenMatcher, TokenScanner } from 'gherkin'
-import { readFileAsync } from 'src/utils/read-file-async.js'
+import { readFileAsync } from '../utils/read-file-async.js'
 import fs from 'fs'
 
 const GherkinParser = new Parser(new AstBuilder())

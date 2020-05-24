@@ -6,6 +6,7 @@ import { jsCodeToMd } from './js-code-to-md.js'
  * @param {Object} [options]
  * @param {Number} options.headingLevel=1 - How many `#` for the test title
  * @param {Boolean|Function} [options.withFlag=true] - Whether to append or not the test flag at the end of the
+ * @param {Boolean|Function} [options.codeParser] - Function that resolved the coee
  * @return {String} The markdown string
  */
 export function avaTestToMd (AvaTest, { headingLevel = 1, withFlag = true, codeParser = jsCodeToMd } = {}) {

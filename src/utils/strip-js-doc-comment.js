@@ -3,6 +3,7 @@ import trim from 'lodash/trim'
 /**
  * Removes all asterisks and additional white spaces from JSDoc comments
  * @param {String} jsDocCommentBlock
+ * @param {String} replaceValue - Value with to replace comment blocks
  * @return {String} The comment without the asterisks
  *
  * @example
@@ -20,6 +21,6 @@ import trim from 'lodash/trim'
  *  // Hello
  * ```
  */
-export function stripJsdocComment (jsDocCommentBlock) {
+export function stripJsdocComment (jsDocCommentBlock, replaceValue = '') {
   return trim(jsDocCommentBlock.replace(/^ \* ?/mgsi, ''))
 }

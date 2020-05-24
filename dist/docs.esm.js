@@ -1,5 +1,5 @@
 /*!
- * @pleasure-js/docs v1.0.0-beta
+ * @pleasure-js/docs v1.0.0
  * (c) 2019-2020 Martin Rafael <tin@devtin.io>
  * MIT
  */
@@ -67,6 +67,11 @@ const readFileAsync = util.promisify(readFile);
  *  *
  *  * Hello
  *  **\/`
+ *
+ *  // => Outputs:
+ *  // A JSDoc description
+ *  //
+ *  // Hello
  * ```
  */
 function stripJsdocComment (jsDocCommentBlock) {
@@ -575,4 +580,4 @@ function jsdocJsonToMarkdown (JSDocJson, { template = JSDocJsonToMarkdownTemplat
   })
 }
 
-export { PleasureDocs, avaTestToMd, avaTestsToMd, cucumberFeatureToMd, jsDocSyntaxToJson, jsDocSyntaxToJsonAsync, jsdocJsonToMarkdown, parseAva, parseAvaFile, parseAvaFileSync, parseFeatureFile, parseGherkin };
+export { PleasureDocs, avaTestToMd, avaTestsToMd, cucumberFeatureToMd, jsCodeToMd, jsDocSyntaxToJson, jsDocSyntaxToJsonAsync, jsdocJsonToMarkdown, parseAva, parseAvaFile, parseAvaFileSync, parseFeatureFile, parseGherkin };

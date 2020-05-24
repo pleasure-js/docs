@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import { readFileAsync } from 'src/utils/read-file-async.js'
-import { stripJsdocComment } from 'src/utils/strip-js-doc-comment.js'
+import { readFileAsync } from '../utils/read-file-async.js'
+import { stripJsdocComment } from '../utils/strip-js-doc-comment.js'
 
 export const availableFlags = ['skip', 'only', 'todo']
 export const patterns = {
