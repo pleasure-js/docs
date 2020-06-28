@@ -14,6 +14,7 @@
     "build:live": "nodemon -w src --exec yarn build",
     "build:docs": "jsdoc2md --template DOCS.hbs --files dist/pleasure-docs.js > DOCS.md",
     "build:readme": "node scripts/build-readme.js",
+    "lint": "standard --ext .js --ignore-path .gitignore src/",
     "test": "ava --serial --verbose"
   },
   "devDependencies": {
@@ -21,12 +22,15 @@
     "ava": "^3.8.2",
     "esm": "^3.2.25",
     "jsdoc": "^3.6.4",
+    "jsdoc-vuejs": "^3.0.8",
     "nodemon": "^2.0.4",
     "rollup": "^2.10.8",
     "rollup-plugin-alias": "^2.2.0",
+    "rollup-plugin-ava-test-example": "^1.0.1",
     "rollup-plugin-babel-minify": "^10.0.0",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0"
+    "rollup-plugin-json": "^4.0.0",
+    "standard": "^14.3.4"
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
@@ -39,7 +43,8 @@
     "inquirer": "^7.1.0",
     "jsdoc-api": "^5.0.4",
     "jsdoc-to-markdown": "^5.0.3",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "pkg-up": "^3.1.0"
   },
   "ava": {
     "babel": true,
@@ -48,22 +53,12 @@
       "src/**/*.unit.js"
     ],
     "require": [
-      "esm"
+      "esm",
+      "./test/utils/setup.js"
     ],
     "snapshotDir": "test/snapshots"
   },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "parser": "babel-eslint",
-    "env": {
-      "es6": true
-    },
-    "globals": {
-      "BigInt": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 2018,
-      "sourceType": "module"
-    }
+  "standard": {
+    "globals": ["fixture", "fixtureRaw", "benchmark", "benchmarkRaw"]
   }
 }
