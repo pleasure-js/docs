@@ -12,7 +12,7 @@ import { jsCodeToMd } from './js-code-to-md.js'
 export function avaTestToMd (AvaTest, { headingLevel = 1, withFlag = true, codeParser = jsCodeToMd } = {}) {
   const { title, description, code, flag } = AvaTest
 
-  const mdTitle = `${ '#'.repeat(headingLevel) } ${ title }${ withFlag && flag ? ' *(' + flag + ')*' : '' }`
+  const mdTitle = `${'#'.repeat(headingLevel)} ${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}`
   const mdCode = code ? codeParser(code) : ''
 
   const markdown = [mdTitle]
@@ -25,7 +25,7 @@ export function avaTestToMd (AvaTest, { headingLevel = 1, withFlag = true, codeP
     markdown.push(mdCode)
   }
 
-  return markdown.join(`\n\n`)
+  return markdown.join('\n\n')
 }
 
 /**

@@ -4,7 +4,7 @@ import test from 'ava'
  * I want to be able to parse test files to improve my software development experience
  */
 
-test(`Parses ava test\`s files`, async t => {
+test('Parses ava test`s files', async t => {
   // some code
   t.pass()
 })
@@ -14,9 +14,9 @@ test(`Parses ava test\`s files`, async t => {
  * right above the tests.
  */
 
-test.skip(`Returning useful information such as the title, description, code and flags`, async t => {
+test.skip('Returning useful information such as the title, description, code and flags', async t => {
   // some other code
   t.pass()
 })
 
-test.todo(`Even todo tests without a sample code are or description are parsed.`)
+test.todo('Even todo tests without a sample code are or description are parsed.')

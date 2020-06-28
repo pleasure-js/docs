@@ -1,15 +1,15 @@
 [
   {
-    "comment": "/**\n * @name Installation\n * @summary\n *\n * ```\n * npm install dmd-readable\n * ```\n */",
+    "comment": "/**\n * @name Installation\n * @summary\n *\n * ```\n * npm install pleasure-docs\n * ```\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 16,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 17,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
     },
     "name": "Installation",
-    "summary": "```\nnpm install dmd-readable\n```",
+    "summary": "```\nnpm install pleasure-docs\n```",
     "longname": "Installation",
     "kind": "member",
     "scope": "global",
@@ -19,8 +19,8 @@
   {
     "comment": "/**\n * @name Usage\n * @summary\n * Pass the plug-in name to [`jsdoc2md`](https://github.com/jsdoc2md/jsdoc-to-markdown) or [`dmd`](https://github.com/jsdoc2md/dmd):\n *\n * ```\n * jsdoc2md --plugin dmd-readable\n * ```\n *\n * This plugin (which was used to generate this readme) does a few things:\n * - removes global indexes (see below)\n * - places descriptions in block-quotes (Use @summary for descriptions without block quotes)\n * - adds more whitespace before headings\n * - changes the delimiter for multiple types in param tables to a comma\n * - adds alias output\n *\n * The removal of global indexes is now a setting in the [template](docs.hbs). If you are using your own template and you wish to retain this feature, add the following line to your template:\n *\n * ```\n * {{optionSet \"global-index-format\" \"none\"~}}\n * ```\n *\n * All options for global-index-format are \"none\", \"grouped\", \"table\", \"dl\". Other options and more info can be found [here](https://github.com/jsdoc2md/jsdoc-to-markdown/blob/master/docs/API.md#jsdoctomarkdown-).\n *\n * This plugin also provides the following helper functions:\n *\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 25,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 26,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -34,22 +34,23 @@
     "level": 0
   },
   {
-    "comment": "/**\n * Removes all asterisks and additional white spaces from JSDoc comments\n * @param {String} jsDocCommentBlock\n * @return {String} The comment without the asterisks\n *\n * @example\n *\n * ```js\n * const jsDocSyntax = `/**\n *  * A JSDoc description\n *  * @typedef {Object} Test\n *  **\\/`\n * ```\n */",
+    "comment": "/**\n * Removes all asterisks and additional white spaces from JSDoc comments\n * @param {String} jsDocCommentBlock\n * @param {String} replaceValue - Value with to replace comment blocks\n * @return {String} The comment without the asterisks\n *\n * @example\n *\n * ```js\n * const jsDocSyntax = `/**\n *  * A JSDoc description\n *  *\n *  * Hello\n *  **\\/`\n *\n *  // => Outputs:\n *  // A JSDoc description\n *  //\n *  // Hello\n * ```\n */",
     "meta": {
       "range": [
-        2039,
-        2147
+        2216,
+        2344
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 71,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 79,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000060",
+        "id": "astnode100000064",
         "name": "stripJsdocComment",
         "type": "FunctionDeclaration",
         "paramnames": [
-          "jsDocCommentBlock"
+          "jsDocCommentBlock",
+          "replaceValue"
         ]
       }
     },
@@ -62,6 +63,15 @@
           ]
         },
         "name": "jsDocCommentBlock"
+      },
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "Value with to replace comment blocks",
+        "name": "replaceValue"
       }
     ],
     "returns": [
@@ -75,7 +85,7 @@
       }
     ],
     "examples": [
-      "```js\nconst jsDocSyntax = `/**\n * A JSDoc description\n * @typedef {Object} Test\n **\\/`\n```"
+      "```js\nconst jsDocSyntax = `/**\n * A JSDoc description\n *\n * Hello\n **\\/`\n\n // => Outputs:\n // A JSDoc description\n //\n // Hello\n```"
     ],
     "name": "stripJsdocComment",
     "longname": "stripJsdocComment",
@@ -87,8 +97,8 @@
   {
     "comment": "/**\n * @typedef {Object} AvaTest\n * @property {String} title - The AVA test title wrapped inside of the test function\n * @property {String} description - The feature description (if any) added above the test as a JSDoc comment\n * @property {String} code - The code found in the test.\n * @property {String} flag - Either `'skip'`, `'only'`, `'todo'` or `null` for none;\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 82,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 90,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -144,18 +154,18 @@
     "level": 0
   },
   {
-    "comment": "/**\n * Parses given AVA test source code\n * @param {String} avaString - The source of the AVA test file\n * @param {Object} [options]\n * @param {Number} options.unIndent=2 - Positive integer in which the code will be un-indented\n * @param {String} options.testName=test - The name of the test function to look-up into the code\n * @return {AvaTest[]} The tests found in the source code\n */",
+    "comment": "/**\n * Parses given AVA test source code\n * @param {String} avaString - The source of the AVA test file\n * @param {Object} [options]\n * @param {Number} options.unIndent=2 - Positive integer in which the code will be un-indented\n * @param {String} options.testName=test - The name of the test function to look-up into the code\n * @return {AvaTest[]} The tests found in the source code\n *\n * @example\n *\n * Given\n *\n * ```js\n *\n * ```\n *\n * ```js\n *\n * ```\n */",
     "meta": {
       "range": [
-        3215,
-        4181
+        3479,
+        4429
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 98,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 118,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000099",
+        "id": "astnode100000104",
         "name": "parseAva",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -226,6 +236,9 @@
         "description": "The tests found in the source code"
       }
     ],
+    "examples": [
+      "Given\n\n```js\n\n```\n\n```js\n\n```"
+    ],
     "name": "parseAva",
     "longname": "parseAva",
     "kind": "function",
@@ -237,15 +250,15 @@
     "comment": "/**\n * Parses given AVA file\n * @async\n * @param {String} file - Path to the AVA file\n * @param {Object} [options] - Same options as in {@link parseAva}\n * @return {Promise<AvaTest[]>}\n */",
     "meta": {
       "range": [
-        4372,
-        4515
+        4620,
+        4763
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 132,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 152,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000253",
+        "id": "astnode100000258",
         "name": "parseAvaFile",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -297,15 +310,15 @@
     "comment": "/**\n * Parses given AVA file synchronously\n * @param {String} file - Path to the AVA file\n * @param {Object} [options] - Same options as in {@link parseAva}\n * @return {AvaTest[]}\n */",
     "meta": {
       "range": [
-        4701,
-        4836
+        4949,
+        5084
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 142,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 162,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000277",
+        "id": "astnode100000282",
         "name": "parseAvaFileSync",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -355,8 +368,8 @@
   {
     "comment": "/**\n * @typedef {Object} CucumberFeature\n * @property {Object} feature - The cucumber feature\n * @property {String} feature.language - The language in which the feature is written.\n * @property {String} feature.name - Feature name\n * @property {String} feature.description - Feature description\n * @property {FeatureScenario[]} feature.children\n * @property {Array} comments - Array of comments\n * @see {@link https://cucumber.io/docs/gherkin/reference/}\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 149,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 169,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -434,8 +447,8 @@
   {
     "comment": "/**\n * @typedef {Object} FeatureScenario\n * @property {String} name - The name of the scenario\n * @property {FeatureTag[]} tags - The tags\n * @property {ScenarioStep[]} steps - The steps\n * @property {ScenarioExample[]} examples - Array of examples\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 160,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 180,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -493,8 +506,8 @@
   {
     "comment": "/**\n * @typedef {Object} ScenarioStep\n * @property {String} keyword - The keyword. I.e: Given, When, Then.\n * @property {String} text - The tag name\n * @property {Object} [argument] - Optional argument\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 168,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 188,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -544,8 +557,8 @@
   {
     "comment": "/**\n * @typedef {Object} FeatureTag\n * @property {String} name - The tag name\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 175,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 195,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -576,8 +589,8 @@
   {
     "comment": "/**\n * @typedef {Object} ScenarioExample\n * @property {String} name - The example name\n * @property {String} keyword - The keyword of the example\n * @property {Object} tableHeader - Content of the table header, if any.\n * @property {Object} tableBody - Content of the table body, if any.\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 180,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 200,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -636,15 +649,15 @@
     "comment": "/**\n * Parses given gherkin syntax\n * @param {String} rawGherkinSyntax - The string source of the gherkin feature\n * @return {Promise<CucumberFeature>}\n */",
     "meta": {
       "range": [
-        6380,
-        6531
+        6626,
+        6776
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 193,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 213,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000314",
+        "id": "astnode100000319",
         "name": "parseGherkin",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -688,15 +701,15 @@
     "comment": "/**\n * Parses given `.feature` file\n * @param {String} featureFile - Path to the `.feature` file\n * @return {Promise<CucumberFeature>}\n */",
     "meta": {
       "range": [
-        6672,
-        6790
+        6917,
+        7035
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 203,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 223,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000331",
+        "id": "astnode100000336",
         "name": "parseFeatureFile",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -737,15 +750,15 @@
     "comment": "/**\n * Parses given {@link CucumberFeature} into markdown\n * @param {CucumberFeature} cucumberFeature - The cucumber feature\n * @param {Object} [options]\n * @param {Number} options.scenarioHeadingLevel=2 - How many '#' prefixes an scenario title\n * @return {String} The markdown text\n *\n * @example <caption>Parsing a `.feature` file.</caption>\n *\n * ```js\n * const { parseFeatureFile, cucumberFeatureToMd } = require('@pleasure-js/docs')\n *\n * parseFeatureFile('/path/to/feature-file.feature')\n *   .then(cucumberFeature => {\n *     console.log(cucumberFeatureToMd(cucumberFeature))\n *   })\n * ```\n */",
     "meta": {
       "range": [
-        7391,
-        8757
+        7640,
+        8968
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 225,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 245,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000345",
+        "id": "astnode100000350",
         "name": "cucumberFeatureToMd",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -811,18 +824,18 @@
     "level": 0
   },
   {
-    "comment": "/**\n * Parses give {@link AvaTest} into markdown\n * @param {AvaTest} AvaTest - The {@link AvaTest}\n * @param {Object} [options]\n * @param {Number} options.headingLevel=1 - How many `#` for the test title\n * @param {Boolean|Function} [options.withFlag=true] - Whether to append or not the test flag at the end of the\n * @return {String} The markdown string\n */",
+    "comment": "/**\n * Parses give {@link AvaTest} into markdown\n * @param {AvaTest} AvaTest - The {@link AvaTest}\n * @param {Object} [options]\n * @param {Number} options.headingLevel=1 - How many `#` for the test title\n * @param {Boolean|Function} [options.withFlag=true] - Whether to append or not the test flag at the end of the\n * @param {Boolean|Function} [options.codeParser] - Function that resolved the coee\n * @return {String} The markdown string\n */",
     "meta": {
       "range": [
-        9705,
-        10189
+        9999,
+        10471
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 288,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 309,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000668",
+        "id": "astnode100000671",
         "name": "avaTestToMd",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -878,6 +891,17 @@
         "defaultvalue": true,
         "description": "Whether to append or not the test flag at the end of the",
         "name": "options.withFlag"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean",
+            "function"
+          ]
+        },
+        "optional": true,
+        "description": "Function that resolved the coee",
+        "name": "options.codeParser"
       }
     ],
     "returns": [
@@ -901,15 +925,15 @@
     "comment": "/**\n * Parses given {@link AvaTest}'s into markdown\n * @param {AvaTest[]} AvaTests - An array of {@link AvaTest}'s\n * @param {Object} [options] - The {@link avaTestToMd} options\n * @return {String}\n */",
     "meta": {
       "range": [
-        10393,
-        10515
+        10675,
+        10797
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 313,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 334,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000762",
+        "id": "astnode100000764",
         "name": "avaTestsToMd",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -962,8 +986,8 @@
   {
     "comment": "/**\n * @typedef {Object} JSDocOptions\n * @see https://github.com/jsdoc2md/jsdoc-api#jsdoc-apijsdocoptions\n * @property {String} source - JS source code\n * @property {String} configure - Path to jsdoc config file\n * @property {Boolean} $workaroundIssue19 - Whether the fix was applied or not\n * @private\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 331,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 352,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -1016,15 +1040,15 @@
     "comment": "/**\n * Prepares jsdoc options for fix  applying\n * @param {JSDocOptions} options\n * @return {JSDocOptions} Fixed options\n * @private\n */",
     "meta": {
       "range": [
-        11430,
-        11728
+        11711,
+        12006
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 346,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 367,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000794",
+        "id": "astnode100000796",
         "name": "fixOptions",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1068,15 +1092,15 @@
     "comment": "/**\n * Spins a temporary jsdoc config file that automatically clears the option value in `source.excludePattern`\n * @param {JSDocOptions} options\n * @private\n */",
     "meta": {
       "range": [
-        11892,
-        12159
+        12170,
+        12434
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 364,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 385,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000840",
+        "id": "astnode100000842",
         "name": "setupTemporaryFile",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1110,15 +1134,15 @@
     "comment": "/**\n * Clean up the temporary created file (if any)\n * @param {JSDocOptions} options\n * @private\n */",
     "meta": {
       "range": [
-        12262,
-        12380
+        12537,
+        12654
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 376,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 397,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000886",
+        "id": "astnode100000888",
         "name": "workaroundCleanup",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1148,15 +1172,15 @@
     "comment": "/**\n * Display user-friendly error\n * @param {Error} err\n * @param {JSDocOptions} options\n * @private\n */",
     "meta": {
       "range": [
-        12488,
-        12937
+        12762,
+        13208
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 388,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 409,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000903",
+        "id": "astnode100000905",
         "name": "handleError",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1195,15 +1219,15 @@
     "comment": "/**\n * @see https://github.com/jsdoc2md/jsdoc-api#module_jsdoc-api.explainSync\n * @private\n */",
     "meta": {
       "range": [
-        13034,
-        13356
+        13305,
+        13619
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 401,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 422,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100000948",
+        "id": "astnode100000947",
         "name": "explainSync",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1231,15 +1255,15 @@
     "comment": "/**\n * @see https://github.com/jsdoc2md/jsdoc-api#jsdocexplainoptions--promise\n * @private\n */",
     "meta": {
       "range": [
-        13453,
-        13779
+        13716,
+        14034
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 426,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 447,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100001001",
+        "id": "astnode100001000",
         "name": "explain",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1267,8 +1291,8 @@
   {
     "comment": "/**\n * @typedef {Object} JSDocElement\n * Item type of the items returned by `jsdoc-api.explainAsync` and `jsdoc-api.explain`\n */",
     "meta": {
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 465,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 486,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {}
@@ -1290,15 +1314,15 @@
     "comment": "/**\n * Converts given js code with jsdoc annotations into a {@link JSDocElement}\n * @param {String} source - The JS code containing jsdoc annotations\n * @param {Object} [options]\n * @param {Boolean} options.removeElementsWithoutId=false - Whether to remove elements without an id or not\n * @param {Boolean} options.filterUndocumented=true - Whether to remove undocumented elements\n * @param {Boolean} options.resolveIds=true - Whether to auto-resolve ids for elements without one or not. `false` when `removeElementsWithoutId=true`\n * @return {JSDocElement[]}\n */",
     "meta": {
       "range": [
-        14895,
-        15276
+        15150,
+        15527
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 480,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 501,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100001116",
+        "id": "astnode100001115",
         "name": "jsDocSyntaxToJson",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1381,15 +1405,15 @@
     "comment": "/**\n *\n * @param {String} source - The JS code containing jsdoc annotations\n * @param {Object} [options]\n * @param {Boolean} options.removeElementsWithoutId=false - Whether to remove elements without an id or not\n * @param {Boolean} options.filterUndocumented=true - Whether to remove undocumented elements\n * @param {Boolean} options.resolveIds=true - Whether to auto-resolve ids for elements without one or not. `false` when `removeElementsWithoutId=true`\n * @return Promise.<JSDocElement[]>\n */",
     "meta": {
       "range": [
-        15777,
-        16171
+        16028,
+        16418
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 503,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 524,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100001172",
+        "id": "astnode100001171",
         "name": "jsDocSyntaxToJsonAsync",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1468,15 +1492,15 @@
     "comment": "/**\n * @enum {Object} JSDocJsonToMarkdownTemplates\n * @property {String} main - Main template only for function descriptions\n * @property {String} readme - Full readme template with header, indexes and descriptions\n * @private\n */",
     "meta": {
       "range": [
-        16410,
-        16837
+        16657,
+        17102
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 522,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 543,
       "columnno": 6,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100001230",
+        "id": "astnode100001229",
         "name": "JSDocJsonToMarkdownTemplates",
         "type": "CallExpression",
         "value": ""
@@ -1521,15 +1545,15 @@
     "comment": "/**\n * Renders given jsdoc object into a markdown string using dmd-clear, dmd-clean and pleasure-docs-dmd\n * @param {Object} JSDocJson\n * @param {Object} [options]\n * @param {String} options.template=JSDocJsonToMarkdownTemplates.readme\n * @param {String[]} options.plugin=['dmd-clear', 'dmd-clean', 'dmd-readable']\n * @return {String} The markdown render\n */",
     "meta": {
       "range": [
-        17199,
-        17435
+        17463,
+        17698
       ],
-      "filename": "2ev25zgr4joq876c4s0chr.js",
-      "lineno": 554,
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 577,
       "columnno": 0,
       "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
       "code": {
-        "id": "astnode100001251",
+        "id": "astnode100001249",
         "name": "jsdocJsonToMarkdown",
         "type": "FunctionDeclaration",
         "paramnames": [
@@ -1592,6 +1616,146 @@
     "kind": "function",
     "scope": "global",
     "id": "jsdoc-json-to-markdown",
+    "level": 0
+  },
+  {
+    "comment": "/**\n * Parses give {@link AvaTest} into a js-doc example\n * @param {AvaTest} AvaTest - The {@link AvaTest}\n * @param {Object} [options]\n * @param {Boolean|Function} [options.codeParser] - Function that resolved the coee\n * @return {String} The markdown string\n * @example <caption>Converts an ava test into a js-doc example</caption>\n *\n * ```js\n * const tests = await parseAvaFile(path.join(__dirname, '../../test/benchmark/sample.test.js'))\n * const example = avaTestToExample(tests[0])\n * t.log(example)\n * t.truthy(example)\n * t.snapshot(example)\n * ```\n */",
+    "meta": {
+      "range": [
+        18262,
+        18555
+      ],
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 601,
+      "columnno": 0,
+      "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
+      "code": {
+        "id": "astnode100001281",
+        "name": "avaTestToExample",
+        "type": "FunctionDeclaration",
+        "paramnames": [
+          "AvaTest",
+          ""
+        ]
+      },
+      "vars": {
+        "undefined": null,
+        "example": "avaTestToExample~example"
+      }
+    },
+    "description": "Parses give {@link AvaTest} into a js-doc example",
+    "params": [
+      {
+        "type": {
+          "names": [
+            "AvaTest"
+          ]
+        },
+        "description": "The {@link AvaTest}",
+        "name": "AvaTest"
+      },
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "optional": true,
+        "name": "options"
+      },
+      {
+        "type": {
+          "names": [
+            "Boolean",
+            "function"
+          ]
+        },
+        "optional": true,
+        "description": "Function that resolved the coee",
+        "name": "options.codeParser"
+      }
+    ],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "description": "The markdown string"
+      }
+    ],
+    "examples": [
+      "<caption>Converts an ava test into a js-doc example</caption>\n\n```js\nconst tests = await parseAvaFile(path.join(__dirname, '../../test/benchmark/sample.test.js'))\nconst example = avaTestToExample(tests[0])\nt.log(example)\nt.truthy(example)\nt.snapshot(example)\n```"
+    ],
+    "name": "avaTestToExample",
+    "longname": "avaTestToExample",
+    "kind": "function",
+    "scope": "global",
+    "id": "ava-test-to-example",
+    "level": 0
+  },
+  {
+    "comment": "/**\n * Embeds corresponding unit tests into the js-doc @example tag of a js file\n * @param {Object} options\n * @param {String} [options.suffix=.unit.js]\n * @return {Function}\n * @example <test\n */",
+    "meta": {
+      "range": [
+        18800,
+        19349
+      ],
+      "filename": "mljk9s7ax1k6wyt4a26z8w.js",
+      "lineno": 620,
+      "columnno": 0,
+      "path": "/var/folders/__/j1g9hqyn6bvcmb99hnw3v71r0000gn/T",
+      "code": {
+        "id": "astnode100001344",
+        "name": "rollupPluginAvaTestToExample",
+        "type": "FunctionDeclaration",
+        "paramnames": [
+          ""
+        ]
+      },
+      "vars": {
+        "": null
+      }
+    },
+    "description": "Embeds corresponding unit tests into the js-doc @example tag of a js file",
+    "params": [
+      {
+        "type": {
+          "names": [
+            "Object"
+          ]
+        },
+        "name": "options"
+      },
+      {
+        "type": {
+          "names": [
+            "String"
+          ]
+        },
+        "optional": true,
+        "defaultvalue": ".unit.js",
+        "name": "options.suffix"
+      }
+    ],
+    "returns": [
+      {
+        "type": {
+          "names": [
+            "function"
+          ]
+        }
+      }
+    ],
+    "examples": [
+      "<test"
+    ],
+    "name": "rollupPluginAvaTestToExample",
+    "longname": "rollupPluginAvaTestToExample",
+    "kind": "function",
+    "scope": "global",
+    "id": "rollup-plugin-ava-test-to-example",
     "level": 0
   }
 ]

@@ -5,16 +5,16 @@ import { stripJsdocComment } from '../utils/strip-js-doc-comment.js'
 
 export const availableFlags = ['skip', 'only', 'todo']
 export const patterns = {
-  findComment: `/\\*\\*(?:\\\\\\n)?(.*?)\\n \\*/`,
-  findStatusAndTitle: `^<test-name>(?:\\.(${ availableFlags.join('|') }))?\\((["'\`])([^\\n]+)\\3`,
-  findCode: `(?:(?<=^<test-name>[^\\n]*)[\\s]*,[\\s]*[^\\{]*\\{\\n(.*?)\\n\\})?`
+  findComment: '/\\*\\*(?:\\\\\\n)?(.*?)\\n \\*/',
+  findStatusAndTitle: `^<test-name>(?:\\.(${availableFlags.join('|')}))?\\((["'\`])([^\\n]+)\\3`,
+  findCode: '(?:(?<=^<test-name>[^\\n]*)[\\s]*,[\\s]*[^\\{]*\\{\\n(.*?)\\n\\})?'
 }
 
 /**
  * @typedef {Object} AvaTest
  * @property {String} title - The AVA test title wrapped inside of the test function
  * @property {String} description - The feature description (if any) added above the test as a JSDoc comment
- * @property {String} code - The code found in the test.
+ * @property {String} code - The code found wrapped in the test function.
  * @property {String} flag - Either `'skip'`, `'only'`, `'todo'` or `null` for none;
  */
 
@@ -41,7 +41,7 @@ export const patterns = {
 export function parseAva (avaString, { unIndent = 2, testName = 'test' } = {}) {
   const { findComment, findStatusAndTitle, findCode } = patterns
   const avaTestPatternText = [
-    `(?:${ findComment }[\\s]+)?`,
+    `(?:${findComment}[\\s]+)?`,
     findStatusAndTitle.replace('<test-name>', testName),
     findCode.replace('<test-name>', testName)
   ].join('')
@@ -51,9 +51,9 @@ export function parseAva (avaString, { unIndent = 2, testName = 'test' } = {}) {
   let testBlock
   while ((testBlock = avaTestsPattern.exec(avaString)) !== null) {
     // build ava test parts
-    const title = testBlock[4].replace(new RegExp(`\\\\${ testBlock[3] }`, 'g'), testBlock[3])
+    const title = testBlock[4].replace(new RegExp(`\\\\${testBlock[3]}`, 'g'), testBlock[3])
     const description = testBlock[1] ? stripJsdocComment(testBlock[1]) : null
-    const code = testBlock[5] ? testBlock[5].replace(new RegExp(`^ {${ unIndent }}`, 'mgsi'), '') : null
+    const code = testBlock[5] ? testBlock[5].replace(new RegExp(`^ {${unIndent}}`, 'mgsi'), '') : null
     const flag = testBlock[2] || null
     testsWithCode.push({
       title,

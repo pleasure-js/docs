@@ -20,15 +20,15 @@ import trim from 'lodash/trim'
  */
 export function cucumberFeatureToMd (cucumberFeature, { scenarioHeadingLevel = 2 } = {}) {
   const { feature } = cucumberFeature
-  const featureMd = [`# ${ trim(feature.name) }\n\n${ trim(feature.description.split('\n').map(trim).join('\n')) }`]
+  const featureMd = [`# ${trim(feature.name)}\n\n${trim(feature.description.split('\n').map(trim).join('\n'))}`]
 
   // scenarios
   feature.children.forEach(scenario => {
-    featureMd.push(`\n${ '#'.repeat(scenarioHeadingLevel) } ${ trim(scenario.name) }\n`)
+    featureMd.push(`\n${'#'.repeat(scenarioHeadingLevel)} ${trim(scenario.name)}\n`)
 
     // steps
     scenario.steps.forEach(step => {
-      featureMd.push(`**${ trim(step.keyword) }** ${ step.text }  `)
+      featureMd.push(`**${trim(step.keyword)}** ${step.text}  `)
       if (step.argument && step.argument.type === 'DocString') {
         featureMd.push('\n```\n' + step.argument.content + '\n```\n')
       }
@@ -37,20 +37,20 @@ export function cucumberFeatureToMd (cucumberFeature, { scenarioHeadingLevel = 2
     // examples
     if (scenario.examples) {
       scenario.examples.forEach(example => {
-        featureMd.push(`\n**${ trim(example.keyword) }**${ example.name ? ': ' + example.name : '' }\n`)
+        featureMd.push(`\n**${trim(example.keyword)}**${example.name ? ': ' + example.name : ''}\n`)
         if (example.tableHeader) {
           const head = example.tableHeader.cells.map(({ value }) => value)
-          const sep = head.map(() => `:---`)
-          featureMd.push(`| ${ head.join(' | ') } |`)
-          featureMd.push(`| ${ sep.join(' | ') } |`)
+          const sep = head.map(() => ':---')
+          featureMd.push(`| ${head.join(' | ')} |`)
+          featureMd.push(`| ${sep.join(' | ')} |`)
           example.tableBody.forEach(({ cells }) => {
             cells = cells.map(({ value }) => value)
-            featureMd.push(`| ${ cells.join(' | ') } |`)
+            featureMd.push(`| ${cells.join(' | ')} |`)
           })
         }
       })
     }
   })
 
-  return featureMd.join(`\n`)
+  return featureMd.join('\n')
 }

@@ -1,7 +1,7 @@
 import { explainSync, explain } from '../utils/jsdoc-api-workaround-issue-19.js'
 import kebabCase from 'lodash/kebabCase'
 
-function removeUndocumented(jsDocElements) {
+function removeUndocumented (jsDocElements) {
   return jsDocElements.filter(docEle => !docEle.undocumented)
 }
 

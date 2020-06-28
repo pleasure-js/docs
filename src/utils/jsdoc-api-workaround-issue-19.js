@@ -77,9 +77,9 @@ function workaroundCleanup (options) {
 function handleError (err, options) {
   if (err.message === 'There are no input files to process.' && options.source && !options.$workaroundIssue19 && tmpDirHasLeadingUnderscore()) {
     // warn user about the known issue
-    console.log(`  WARNING!!!`)
-    console.log(`  Be aware of issue: https://github.com/jsdoc/jsdoc/issues/1712`)
-    console.log(`  And its workaround described here: https://github.com/jsdoc2md/jsdoc-api/issues/19`)
+    console.log('  WARNING!!!')
+    console.log('  Be aware of issue: https://github.com/jsdoc/jsdoc/issues/1712')
+    console.log('  And its workaround described here: https://github.com/jsdoc2md/jsdoc-api/issues/19')
   }
 }
 

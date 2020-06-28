@@ -57,6 +57,7 @@ const readFileAsync = util.promisify(readFile);
 /**
  * Removes all asterisks and additional white spaces from JSDoc comments
  * @param {String} jsDocCommentBlock
+ * @param {String} replaceValue - Value with to replace comment blocks
  * @return {String} The comment without the asterisks
  *
  * @example
@@ -74,22 +75,22 @@ const readFileAsync = util.promisify(readFile);
  *  // Hello
  * ```
  */
-function stripJsdocComment (jsDocCommentBlock) {
+function stripJsdocComment (jsDocCommentBlock, replaceValue = '') {
   return trim(jsDocCommentBlock.replace(/^ \* ?/mgsi, ''))
 }
 
 const availableFlags = ['skip', 'only', 'todo'];
 const patterns = {
-  findComment: `/\\*\\*(?:\\\\\\n)?(.*?)\\n \\*/`,
-  findStatusAndTitle: `^<test-name>(?:\\.(${ availableFlags.join('|') }))?\\((["'\`])([^\\n]+)\\3`,
-  findCode: `(?:(?<=^<test-name>[^\\n]*)[\\s]*,[\\s]*[^\\{]*\\{\\n(.*?)\\n\\})?`
+  findComment: '/\\*\\*(?:\\\\\\n)?(.*?)\\n \\*/',
+  findStatusAndTitle: `^<test-name>(?:\\.(${availableFlags.join('|')}))?\\((["'\`])([^\\n]+)\\3`,
+  findCode: '(?:(?<=^<test-name>[^\\n]*)[\\s]*,[\\s]*[^\\{]*\\{\\n(.*?)\\n\\})?'
 };
 
 /**
  * @typedef {Object} AvaTest
  * @property {String} title - The AVA test title wrapped inside of the test function
  * @property {String} description - The feature description (if any) added above the test as a JSDoc comment
- * @property {String} code - The code found in the test.
+ * @property {String} code - The code found wrapped in the test function.
  * @property {String} flag - Either `'skip'`, `'only'`, `'todo'` or `null` for none;
  */
 
@@ -116,7 +117,7 @@ const patterns = {
 function parseAva (avaString, { unIndent = 2, testName = 'test' } = {}) {
   const { findComment, findStatusAndTitle, findCode } = patterns;
   const avaTestPatternText = [
-    `(?:${ findComment }[\\s]+)?`,
+    `(?:${findComment}[\\s]+)?`,
     findStatusAndTitle.replace('<test-name>', testName),
     findCode.replace('<test-name>', testName)
   ].join('');
@@ -126,9 +127,9 @@ function parseAva (avaString, { unIndent = 2, testName = 'test' } = {}) {
   let testBlock;
   while ((testBlock = avaTestsPattern.exec(avaString)) !== null) {
     // build ava test parts
-    const title = testBlock[4].replace(new RegExp(`\\\\${ testBlock[3] }`, 'g'), testBlock[3]);
+    const title = testBlock[4].replace(new RegExp(`\\\\${testBlock[3]}`, 'g'), testBlock[3]);
     const description = testBlock[1] ? stripJsdocComment(testBlock[1]) : null;
-    const code = testBlock[5] ? testBlock[5].replace(new RegExp(`^ {${ unIndent }}`, 'mgsi'), '') : null;
+    const code = testBlock[5] ? testBlock[5].replace(new RegExp(`^ {${unIndent}}`, 'mgsi'), '') : null;
     const flag = testBlock[2] || null;
     testsWithCode.push({
       title,
@@ -242,15 +243,15 @@ async function parseFeatureFile (featureFile) {
  */
 function cucumberFeatureToMd (cucumberFeature, { scenarioHeadingLevel = 2 } = {}) {
   const { feature } = cucumberFeature;
-  const featureMd = [`# ${ trim(feature.name) }\n\n${ trim(feature.description.split('\n').map(trim).join('\n')) }`];
+  const featureMd = [`# ${trim(feature.name)}\n\n${trim(feature.description.split('\n').map(trim).join('\n'))}`];
 
   // scenarios
   feature.children.forEach(scenario => {
-    featureMd.push(`\n${ '#'.repeat(scenarioHeadingLevel) } ${ trim(scenario.name) }\n`);
+    featureMd.push(`\n${'#'.repeat(scenarioHeadingLevel)} ${trim(scenario.name)}\n`);
 
     // steps
     scenario.steps.forEach(step => {
-      featureMd.push(`**${ trim(step.keyword) }** ${ step.text }  `);
+      featureMd.push(`**${trim(step.keyword)}** ${step.text}  `);
       if (step.argument && step.argument.type === 'DocString') {
         featureMd.push('\n```\n' + step.argument.content + '\n```\n');
       }
@@ -259,22 +260,22 @@ function cucumberFeatureToMd (cucumberFeature, { scenarioHeadingLevel = 2 } = {}
     // examples
     if (scenario.examples) {
       scenario.examples.forEach(example => {
-        featureMd.push(`\n**${ trim(example.keyword) }**${ example.name ? ': ' + example.name : '' }\n`);
+        featureMd.push(`\n**${trim(example.keyword)}**${example.name ? ': ' + example.name : ''}\n`);
         if (example.tableHeader) {
           const head = example.tableHeader.cells.map(({ value }) => value);
-          const sep = head.map(() => `:---`);
-          featureMd.push(`| ${ head.join(' | ') } |`);
-          featureMd.push(`| ${ sep.join(' | ') } |`);
+          const sep = head.map(() => ':---');
+          featureMd.push(`| ${head.join(' | ')} |`);
+          featureMd.push(`| ${sep.join(' | ')} |`);
           example.tableBody.forEach(({ cells }) => {
             cells = cells.map(({ value }) => value);
-            featureMd.push(`| ${ cells.join(' | ') } |`);
+            featureMd.push(`| ${cells.join(' | ')} |`);
           });
         }
       });
     }
   });
 
-  return featureMd.join(`\n`)
+  return featureMd.join('\n')
 }
 
 function jsCodeToMd (jsCode) {
@@ -301,12 +302,13 @@ function jsCodeToMd (jsCode) {
  * @param {Object} [options]
  * @param {Number} options.headingLevel=1 - How many `#` for the test title
  * @param {Boolean|Function} [options.withFlag=true] - Whether to append or not the test flag at the end of the
+ * @param {Boolean|Function} [options.codeParser] - Function that resolved the coee
  * @return {String} The markdown string
  */
 function avaTestToMd (AvaTest, { headingLevel = 1, withFlag = true, codeParser = jsCodeToMd } = {}) {
   const { title, description, code, flag } = AvaTest;
 
-  const mdTitle = `${ '#'.repeat(headingLevel) } ${ title }${ withFlag && flag ? ' *(' + flag + ')*' : '' }`;
+  const mdTitle = `${'#'.repeat(headingLevel)} ${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}`;
   const mdCode = code ? codeParser(code) : '';
 
   const markdown = [mdTitle];
@@ -319,7 +321,7 @@ function avaTestToMd (AvaTest, { headingLevel = 1, withFlag = true, codeParser =
     markdown.push(mdCode);
   }
 
-  return markdown.join(`\n\n`)
+  return markdown.join('\n\n')
 }
 
 /**
@@ -406,9 +408,9 @@ function workaroundCleanup (options) {
 function handleError (err, options) {
   if (err.message === 'There are no input files to process.' && options.source && !options.$workaroundIssue19 && tmpDirHasLeadingUnderscore()) {
     // warn user about the known issue
-    console.log(`  WARNING!!!`);
-    console.log(`  Be aware of issue: https://github.com/jsdoc/jsdoc/issues/1712`);
-    console.log(`  And its workaround described here: https://github.com/jsdoc2md/jsdoc-api/issues/19`);
+    console.log('  WARNING!!!');
+    console.log('  Be aware of issue: https://github.com/jsdoc/jsdoc/issues/1712');
+    console.log('  And its workaround described here: https://github.com/jsdoc2md/jsdoc-api/issues/19');
   }
 }
 
@@ -462,7 +464,7 @@ async function explain (options) {
   return res
 }
 
-function removeUndocumented(jsDocElements) {
+function removeUndocumented (jsDocElements) {
   return jsDocElements.filter(docEle => !docEle.undocumented)
 }
 
@@ -538,21 +540,19 @@ async function jsDocSyntaxToJsonAsync (source, { resolveIds = true, filterUndocu
  * @private
  */
 const JSDocJsonToMarkdownTemplates = (() => {
-  const main = `{{>main}}`;
+  const main = '{{>main}}';
 
   const readme = `{{optionSet "heading-depth" 3~}}
-# {{package "name"}}
+# {{pkg "name"}}
 
-> {{package "description"}}
+> {{pkg "description"}}
 >
-> {{#each (package "badges")}}[![{{this.name}}][{{this.name}}]][{{this.name}}-url]
+> {{#each (pkg "badges")}}[![{{this.name}}][{{this.name}}]][{{this.name}}-url]
   {{/each}}
-  
-{{>meta-header}}
 
 {{>main}}
 
-{{#each (package "badges")}}
+{{#each (pkg "badges")}}
 [{{this.name}}]: {{this.image}}
 [{{this.name}}-url]: {{this.url}}
 {{/each}}`;
@@ -571,8 +571,7 @@ const JSDocJsonToMarkdownTemplates = (() => {
  * @param {String[]} options.plugin=['dmd-clear', 'dmd-clean', 'dmd-readable']
  * @return {String} The markdown render
  */
-function jsdocJsonToMarkdown (JSDocJson, { template = JSDocJsonToMarkdownTemplates.readme, plugin = ['dmd-clear', 'dmd-clean', 'dmd-readable'] } = {}) {
-
+function jsdocJsonToMarkdown (JSDocJson, { template = JSDocJsonToMarkdownTemplates.readme, plugin = ['dmd-readme'] } = {}) {
   return json2md.renderSync({
     data: JSDocJson,
     template,
@@ -580,4 +579,24 @@ function jsdocJsonToMarkdown (JSDocJson, { template = JSDocJsonToMarkdownTemplat
   })
 }
 
-export { PleasureDocs, avaTestToMd, avaTestsToMd, cucumberFeatureToMd, jsCodeToMd, jsDocSyntaxToJson, jsDocSyntaxToJsonAsync, jsdocJsonToMarkdown, parseAva, parseAvaFile, parseAvaFileSync, parseFeatureFile, parseGherkin };
+/**
+ * @param {String} vueString
+ */
+function parseVue (vueString) {
+  const matched = [...vueString.matchAll(/^<[\s]*([^\s]+)([^>]+)?>(.*?)^<\/\1>/mgs)];
+  const found = {};
+  matched.forEach(([match, tag, params, code]) => {
+    found[tag] = {
+      params,
+      code,
+      match
+    };
+  });
+  if (found.script) {
+    found.script.jsdoc = jsDocSyntaxToJson(found.script.code);
+    found.script.jsdocMd = jsdocJsonToMarkdown(found.script.jsdoc, { plugin: ['dmd-clean'], template: JSDocJsonToMarkdownTemplates.main });
+  }
+  return found
+}
+
+export { PleasureDocs, avaTestToMd, avaTestsToMd, cucumberFeatureToMd, jsCodeToMd, jsDocSyntaxToJson, jsDocSyntaxToJsonAsync, jsdocJsonToMarkdown, parseAva, parseAvaFile, parseAvaFileSync, parseFeatureFile, parseGherkin, parseVue };

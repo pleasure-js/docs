@@ -2,8 +2,8 @@ import path from 'path'
 import commonjs from 'rollup-plugin-commonjs'
 import json from 'rollup-plugin-json'
 import alias from 'rollup-plugin-alias'
-import { startCase } from 'lodash'
 import { name, version, author, license } from './package.json'
+import AvaTestExample from 'rollup-plugin-ava-test-example'
 
 const fromSrc = (...paths) => {
   return path.join(__dirname, 'src', ...paths)
@@ -36,13 +36,14 @@ const plugins = [
 
     // if false then skip sourceMap generation for CommonJS modules
     sourceMap: true // Default: true
-  })
+  }),
+  AvaTestExample()
 ]
 
 const banner = `/*!
- * ${ name } v${ version }
- * (c) 2019-${ new Date().getFullYear() } ${ author }
- * ${ license }
+ * ${name} v${version}
+ * (c) 2019-${new Date().getFullYear()} ${author}
+ * ${license}
  */`
 
 export default [
@@ -50,10 +51,10 @@ export default [
     input: 'src/index.js',
     output: [
       {
-        file: `dist/docs.js`,
+        file: 'dist/docs.js',
         format: 'cjs',
         banner
-      },
+      }
     ],
     plugins
   },
@@ -61,11 +62,11 @@ export default [
     input: 'src/index.js',
     output: [
       {
-        file: `dist/docs.esm.js`,
+        file: 'dist/docs.esm.js',
         format: 'esm',
         banner
       }
     ],
     plugins
-  },
+  }
 ]
