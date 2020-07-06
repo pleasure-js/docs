@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.2.0-beta",
   "name": "@pleasure-js/docs",
   "description": "Better docs for software dev",
   "author": "Martin Rafael <tin@devtin.io>",
@@ -59,6 +59,11 @@
     "snapshotDir": "test/snapshots"
   },
   "standard": {
-    "globals": ["fixture", "fixtureRaw", "benchmark", "benchmarkRaw"]
+    "globals": [
+      "fixture",
+      "fixtureRaw",
+      "benchmark",
+      "benchmarkRaw"
+    ]
   }
 }
