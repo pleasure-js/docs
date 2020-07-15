@@ -1,5 +1,5 @@
 /*!
- * @pleasure-js/docs v1.0.0
+ * @pleasure-js/docs v1.2.1-beta
  * (c) 2019-2020 Martin Rafael <tin@devtin.io>
  * MIT
  */
@@ -15,9 +15,9 @@ var path = _interopDefault(require('path'));
 var util = _interopDefault(require('util'));
 var trim = _interopDefault(require('lodash/trim'));
 var gherkin = require('gherkin');
+var kebabCase = _interopDefault(require('lodash/kebabCase'));
 var jsdocApi = require('jsdoc-api');
 var os = _interopDefault(require('os'));
-var kebabCase = _interopDefault(require('lodash/kebabCase'));
 var json2md = _interopDefault(require('jsdoc-to-markdown'));
 
 /**
@@ -307,16 +307,44 @@ function jsCodeToMd (jsCode) {
  * Parses give {@link AvaTest} into markdown
  * @param {AvaTest} AvaTest - The {@link AvaTest}
  * @param {Object} [options]
+ * @param {Boolean} [options.htmlTitle=false] - Whether to use real html tags for the titles or not
+ * @param {Boolean} [options.wrapInDetails=false] - Whether to wrap the test inside a  details / summary tag
  * @param {Number} options.headingLevel=1 - How many `#` for the test title
  * @param {Boolean|Function} [options.withFlag=true] - Whether to append or not the test flag at the end of the
  * @param {Boolean|Function} [options.codeParser] - Function that resolved the coee
  * @return {String} The markdown string
  */
-function avaTestToMd (AvaTest, { headingLevel = 1, withFlag = true, codeParser = jsCodeToMd } = {}) {
+function avaTestToMd (AvaTest, {
+  htmlTitle = false,
+  wrapInDetails = false,
+  headingLevel = 1,
+  withFlag = true,
+  codeParser = jsCodeToMd
+} = {}) {
   const { title, description, code, flag } = AvaTest;
+  const orEmpty = v => v || '';
+  let mdTitle;
 
-  const mdTitle = `${'#'.repeat(headingLevel)} ${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}`;
+  if (!htmlTitle) {
+    mdTitle = `${'#'.repeat(headingLevel)} ${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}`;
+  } else {
+    mdTitle = `<a name="${kebabCase(title)}"></a>
+
+<h${headingLevel}>${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}</h${headingLevel}>`;
+  }
+
   const mdCode = code ? codeParser(code) : '';
+
+  if (wrapInDetails) {
+    return `<a name="${kebabCase(title)}"></a>
+<details>
+    <summary><strong>${title}${withFlag && flag ? ' <em>(' + flag + ')</em>' : ''}</strong></summary>
+
+${orEmpty(description)}
+
+${orEmpty(mdCode)}
+</details>`
+  }
 
   const markdown = [mdTitle];
 
@@ -601,7 +629,7 @@ function parseVue (vueString) {
   });
   if (found.script) {
     found.script.jsdoc = jsDocSyntaxToJson(found.script.code);
-    found.script.jsdocMd = jsdocJsonToMarkdown(found.script.jsdoc, { plugin: ['dmd-clean'], template: JSDocJsonToMarkdownTemplates.main });
+    found.script.jsdocMd = jsdocJsonToMarkdown(found.script.jsdoc, { plugin: [require.resolve('dmd-clean')], template: JSDocJsonToMarkdownTemplates.main });
   }
   return found
 }
