@@ -1,19 +1,48 @@
 import { jsCodeToMd } from './js-code-to-md.js'
+import kebabCase from 'lodash/kebabCase'
 
 /**
  * Parses give {@link AvaTest} into markdown
  * @param {AvaTest} AvaTest - The {@link AvaTest}
  * @param {Object} [options]
+ * @param {Boolean} [options.htmlTitle=false] - Whether to use real html tags for the titles or not
+ * @param {Boolean} [options.wrapInDetails=false] - Whether to wrap the test inside a  details / summary tag
  * @param {Number} options.headingLevel=1 - How many `#` for the test title
  * @param {Boolean|Function} [options.withFlag=true] - Whether to append or not the test flag at the end of the
  * @param {Boolean|Function} [options.codeParser] - Function that resolved the coee
  * @return {String} The markdown string
  */
-export function avaTestToMd (AvaTest, { headingLevel = 1, withFlag = true, codeParser = jsCodeToMd } = {}) {
+export function avaTestToMd (AvaTest, {
+  htmlTitle = false,
+  wrapInDetails = false,
+  headingLevel = 1,
+  withFlag = true,
+  codeParser = jsCodeToMd
+} = {}) {
   const { title, description, code, flag } = AvaTest
+  const orEmpty = v => v || ''
+  let mdTitle
 
-  const mdTitle = `${'#'.repeat(headingLevel)} ${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}`
+  if (!htmlTitle) {
+    mdTitle = `${'#'.repeat(headingLevel)} ${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}`
+  } else {
+    mdTitle = `<a name="${kebabCase(title)}"></a>
+
+<h${headingLevel}>${title}${withFlag && flag ? ' *(' + flag + ')*' : ''}</h${headingLevel}>`
+  }
+
   const mdCode = code ? codeParser(code) : ''
+
+  if (wrapInDetails) {
+    return `<a name="${kebabCase(title)}"></a>
+<details>
+    <summary><strong>${title}${withFlag && flag ? ' <em>(' + flag + ')</em>' : ''}</strong></summary>
+
+${orEmpty(description)}
+
+${orEmpty(mdCode)}
+</details>`
+  }
 
   const markdown = [mdTitle]
 
