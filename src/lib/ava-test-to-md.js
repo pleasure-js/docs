@@ -1,24 +1,36 @@
 import { jsCodeToMd } from './js-code-to-md.js'
 import kebabCase from 'lodash/kebabCase'
 
+const Options = {
+  joinString: '\n\n',
+  htmlTitle: false,
+  wrapInDetails: false,
+  headingLevel: 1,
+  withFlag: true,
+  codeParser: jsCodeToMd
+}
+
 /**
  * Parses give {@link AvaTest} into markdown
  * @param {AvaTest} AvaTest - The {@link AvaTest}
  * @param {Object} [options]
  * @param {Boolean} [options.htmlTitle=false] - Whether to use real html tags for the titles or not
  * @param {Boolean} [options.wrapInDetails=false] - Whether to wrap the test inside a  details / summary tag
+ * @param {Boolean} [options.joinString=\n\n]
  * @param {Number} options.headingLevel=1 - How many `#` for the test title
  * @param {Boolean|Function} [options.withFlag=true] - Whether to append or not the test flag at the end of the
  * @param {Boolean|Function} [options.codeParser] - Function that resolved the coee
  * @return {String} The markdown string
  */
-export function avaTestToMd (AvaTest, {
-  htmlTitle = false,
-  wrapInDetails = false,
-  headingLevel = 1,
-  withFlag = true,
-  codeParser = jsCodeToMd
-} = {}) {
+export function avaTestToMd (AvaTest, options = {}) {
+  const {
+    joinString,
+    htmlTitle,
+    wrapInDetails,
+    headingLevel,
+    withFlag,
+    codeParser
+  } = Object.assign({}, Options, options)
   const { title, description, code, flag } = AvaTest
   const orEmpty = v => v || ''
   let mdTitle
@@ -54,7 +66,7 @@ ${orEmpty(mdCode)}
     markdown.push(mdCode)
   }
 
-  return markdown.join('\n\n')
+  return markdown.join(joinString)
 }
 
 /**
@@ -64,5 +76,6 @@ ${orEmpty(mdCode)}
  * @return {String}
  */
 export function avaTestsToMd (AvaTests, options) {
-  return AvaTests.map(avaTest => avaTestToMd(avaTest, options)).join('\n\n')
+  options = Object.assign({}, Options, options)
+  return AvaTests.map(avaTest => avaTestToMd(avaTest, options)).join(options.joinString)
 }
