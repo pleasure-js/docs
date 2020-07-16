@@ -38,7 +38,7 @@ export const JSDocJsonToMarkdownTemplates = (() => {
  * @param {String[]} options.plugin=['dmd-clear', 'dmd-clean', 'dmd-readable']
  * @return {String} The markdown render
  */
-export function jsdocJsonToMarkdown (JSDocJson, { template = JSDocJsonToMarkdownTemplates.readme, plugin = ['dmd-readme'] } = {}) {
+export function jsdocJsonToMarkdown (JSDocJson, { template = JSDocJsonToMarkdownTemplates.readme, plugin = [require.resolve('dmd-readme')] } = {}) {
   return json2md.renderSync({
     data: JSDocJson,
     template,

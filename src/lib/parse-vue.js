@@ -16,7 +16,7 @@ export function parseVue (vueString) {
   })
   if (found.script) {
     found.script.jsdoc = jsDocSyntaxToJson(found.script.code)
-    found.script.jsdocMd = jsdocJsonToMarkdown(found.script.jsdoc, { plugin: ['dmd-clean'], template: JSDocJsonToMarkdownTemplates.main })
+    found.script.jsdocMd = jsdocJsonToMarkdown(found.script.jsdoc, { plugin: [require.resolve('dmd-clean')], template: JSDocJsonToMarkdownTemplates.main })
   }
   return found
 }
